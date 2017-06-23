@@ -1,35 +1,45 @@
-# require 'shiny_and_mysterious_gem'
+require 'language'
+require 'order'
+
 class Bakery
 
-    def initialize
-        @inventory = [
-            {
-                :item => 'VS5',
-                :packs => [
-                    [ 3, '$6.99' ],
-                    [ 5, '$8.99' ]
-                ]
-            },
-            {
-                :item => 'MB11',
-                :packs => [
-                    [ 2, '$9.95'  ],
-                    [ 5, '$16.95' ],
-                    [ 8, '$24.95' ]
-                ]
-            },
-            {
-                :item => 'CF',
-                :packs => [
-                    [ 3, '$5.95' ],
-                    [ 5, '$9.95' ],
-                    [ 9, '$16.99']
-                ]
-            }
-        ]
+    def self.run
+
+        order = Order.new
+
+        self.print_out(ORDER_HEADER)
+        self.print_out(ORDER_EXAMPLE)
+        self.print_out(ORDER_COMPLETE)
+
+        input = ''
+        until input == 'done' do
+            begin
+                input = gets().chomp()
+
+                if !order.has_been_recorded?(input) && input != 'done'
+                    raise
+                end
+
+            rescue Exception => e
+                self.print_out(ORDER_FORMAT_ERROR)
+                self.print_out(ORDER_EXAMPLE)
+                retry
+            else
+                if input == 'done'
+                    self.print_out('----')
+                    self.print_out(THANK_YOU_MESSAGE)
+                    puts order.calculate
+                else
+                    self.print_out(CONTINUE)
+                end
+            end
+        end
+
     end
 
 
-
+    def self.print_out(message)
+        puts message
+    end
 
 end
