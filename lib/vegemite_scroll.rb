@@ -1,6 +1,4 @@
-require 'inventory'
-
-class VegemiteScroll < Inventory
+class VegemiteScroll
 
     def self.packs
         [

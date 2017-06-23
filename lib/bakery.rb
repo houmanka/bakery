@@ -15,7 +15,6 @@ class Bakery
         until input == 'done' do
             begin
                 input = gets().chomp()
-
                 if !order.has_been_recorded?(input) && input != 'done'
                     raise
                 end
@@ -28,7 +27,7 @@ class Bakery
                 if input == 'done'
                     self.print_out('----')
                     self.print_out(THANK_YOU_MESSAGE)
-                    puts order.calculate
+                    puts order.fulfill_order
                 else
                     self.print_out(CONTINUE)
                 end

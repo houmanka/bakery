@@ -32,8 +32,8 @@ describe Inventory do
             expect(inventory).to be_instance_of(Inventory)
         end
 
-        it 'expects to find all of the decendants', :focus=>true do
-            items = Inventory.descendants
+        it 'expects to find all of the decendants' do
+            items = Inventory.define_inventory
             expect( items ).to contain_exactly(BlueberryMuffin, VegemiteScroll, Croissant )
         end
 

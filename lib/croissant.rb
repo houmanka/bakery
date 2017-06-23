@@ -1,5 +1,4 @@
-
-class Croissant < Inventory
+class Croissant
 
     def self.packs
         [

@@ -1,6 +1,4 @@
-require 'inventory'
-
-class BlueberryMuffin < Inventory
+class BlueberryMuffin
 
 
     def self.packs

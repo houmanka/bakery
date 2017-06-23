@@ -1,3 +1,7 @@
+require 'croissant'
+require 'vegemite_scroll'
+require 'blueberry_muffin'
+
 class Inventory
 
     # FIXME: this is anti pattern to lazy loading.
@@ -5,8 +9,8 @@ class Inventory
         @klass_array = []
     end
 
-    def self.descendants
-        ObjectSpace.each_object(Class).select { |klass| klass < self }
+    def self.define_inventory
+        [ Croissant, BlueberryMuffin, VegemiteScroll]
     end
 
 
@@ -14,14 +18,14 @@ class Inventory
     def fetch_an_item(code)
 
         # find the item code
-        klasses = Inventory.descendants
+        klasses = Inventory.define_inventory
 
         packs = []
         klasses.each do |klass|
-            if klass.code == code
+            if klass.code.to_s == code.to_s
                 packs.push klass.packs
                 packs.push [ {:code => code } ]
-                break
+
             end
         end
 
