@@ -15,9 +15,7 @@ class Inventory
     # @param [String] item code
     # @return [Array<Hash>] for one product
 
-
     def self.fetch_an_item(code)
-
         # find the item code
         klasses = Inventory.define_inventory
 
@@ -31,9 +29,7 @@ class Inventory
         end
 
         return packs.flatten
-
     end
-
 
     private
 

@@ -22,6 +22,4 @@ require 'validation'
 
         end
 
-
-
     end

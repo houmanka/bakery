@@ -1,19 +1,25 @@
 require 'bakery'
+require 'language'
 
 describe Bakery do
 
+    let (:sample_orders) {
+        {
+            valid_orders: ['13 CF', '5 VS5'],
+            invalid_orders: [ '12 M*11', nil, ' ABM', '12 VSff' ]
+        }
+    }
+
+
+
     context 'Bakery' do
-        # before(:example) do
-        #     allow(STDOUT).to receive(:puts)
-        # end
-        # it 'returns if there is odd number of input params' do
-        #     inputs = (['input'] * (rand(3) * 2 + 1)).join(' ')
-        #     allow(STDIN).to receive_message_chain(:gets, :chomp).and_return(inputs)
-        #
-        #     Bakery.run
-        # end
 
+       it 'expects to return error' do
 
-    end
+           # feed the sample order valid
+
+       end
+
+     end
 
 end

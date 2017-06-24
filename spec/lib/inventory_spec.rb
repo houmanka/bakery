@@ -18,7 +18,7 @@ describe Inventory do
             ['ABC', nil, '']
         }
 
-        let(:blueberry_muffin) {
+        let(:sample_product) {
             [
                 {:pack=>2, :price=>9.95},
                 {:pack=>5, :price=>16.95},
@@ -27,13 +27,17 @@ describe Inventory do
             ]
         }
 
+        let(:class_array) {
+            [BlueberryMuffin, VegemiteScroll, Croissant]
+        }
+
         it 'expects to return all of the classes' do
-            expect( Inventory.define_inventory ).to contain_exactly(BlueberryMuffin, VegemiteScroll, Croissant )
+            expect( Inventory.define_inventory ).to match_array(class_array)
         end
 
 
         it 'expects to return code and pack in correct structure' do
-            expect(inventory.fetch_an_item(code)).to match_array(blueberry_muffin)
+            expect(inventory.fetch_an_item(code)).to match_array(sample_product)
         end
 
         it 'expects to return empty array if code is not available' do
@@ -42,10 +46,5 @@ describe Inventory do
             end
         end
 
-
-
     end
-
-
-
 end
