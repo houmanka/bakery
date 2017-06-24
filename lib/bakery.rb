@@ -32,7 +32,7 @@ class Bakery
         self.print_out(ORDER_COMPLETE)
 
         input = ''
-        # until input == DONE do
+         until input == DONE do
             begin
                 input = gets().chomp()
                 if !order.has_been_recorded?(input) && input != DONE
@@ -42,7 +42,7 @@ class Bakery
             rescue Exception => e
                 self.print_out(ORDER_FORMAT_ERROR)
                 self.print_out(ORDER_EXAMPLE)
-                # retry
+                retry
             else
                 if input == DONE
                     self.print_out('----')
@@ -52,7 +52,7 @@ class Bakery
                     self.print_out(CONTINUE)
                 end
             end
-        # end
+         end
 
     end
 

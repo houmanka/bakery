@@ -2,7 +2,7 @@ require 'bakery'
 require 'language'
 require 'support/let_singleton'
 
-
+# Note: Need to work on this.
 describe Bakery do
 
     let (:singleton) {
@@ -10,7 +10,6 @@ describe Bakery do
     }
 
     context 'Application' do
-
         def fake_stdin(*args)
             begin
                 $stdin = StringIO.new
@@ -22,13 +21,17 @@ describe Bakery do
             end
         end
 
-        it "should receive `foobar`" do
-            fake_stdin("foobar") do
+        specify { expect { print('10 VS5') }.to output.to_stdout }
+        specify {
+            Bakery.run
+            expect { print('done') }.to output.to_stdout }
+
+        it 'should receive `10 VS5`' do
+            fake_stdin('10 VS5') do
                 input = gets().chomp()
-                puts input
+                expect(input).to eq('10 VS5')
             end
         end
-
      end
 
 end
