@@ -1,25 +1,23 @@
 require 'validation'
+require 'support/let_singleton'
 
-    describe Validation do
+describe Validation do
 
-        let (:valid_number) {
-            ['10 ABC', '1 abc']
-        }
-        let (:invalid_number_format) {
-            ['111', '', nil]
-        }
+    let (:singleton) {
+        LetSingleton.instance
+    }
 
-        it 'expects validates the inout format' do
-            invalid_number_format.each do |number|
-                v = Validation.validate(number)
-                expect(v).to be_falsy
-            end
+    it 'expects validates the inout format' do
+        singleton.sample_orders[:invalid_number_format].each do |number|
+            v = Validation.validate(number)
+            expect(v).to be_falsy
+        end
 
-            valid_number.each do |number|
-                v = Validation.validate(number)
-                expect(v).to be_truthy
-            end
-
+        singleton.sample_orders[:valid_orders].each do |number|
+            v = Validation.validate(number)
+            expect(v).to be_truthy
         end
 
     end
+
+end

@@ -4,6 +4,7 @@ require 'blueberry_muffin'
 require 'vegemite_scroll'
 require 'croissant'
 require 'validation'
+require 'support/let_singleton'
 
 
 describe OrderWorker do
@@ -17,21 +18,17 @@ describe OrderWorker do
         @order_class.extend(OrderWorker)
     end
 
-    let(:item_codes) {
-        {
-            :valid_code => '12 MB11',
-            :invalid_code => '12 MB11ee',
-            :order_series => [ '12 MB11', nil, ' ABM', '12 VSff' ],
-            :valid_product_hash => {:qty => '12', :code => 'MB11'}
-        }
+    let (:singleton) {
+        LetSingleton.instance
     }
+
 
     let (:single_pack) {
-        @order_class.fetch_from_inventory(item_codes[:valid_code])
+        @order_class.fetch_from_inventory(singleton.sample_orders[:valid_orders].first)
     }
 
-    let (:sample_order_ready) {
-        {:summery=>{:total=>25.85, :sku_number=>"CF", :qty=>"13"}, :line_items=>[{:qty=>1, :pack=>3, :each_pack=>5.95}, {:qty=>2, :pack=>5, :each_pack=>9.95}]}
+    let (:valid_order) {
+        singleton.sample_orders[:valid_orders].first
     }
 
 
@@ -43,11 +40,11 @@ describe OrderWorker do
         end
 
         it 'expects to check if item code is a valid code' do
-            expect(is_a_valid_helper(item_codes[:valid_code])).to be_truthy
+            expect(is_a_valid_helper(valid_order)).to be_truthy
         end
 
         it 'expects to return false if the item code is invalid' do
-            expect(is_a_valid_helper(item_codes[:invalid_code])).to be_falsy
+            expect(is_a_valid_helper(singleton.sample_orders[:invalid_orders].first)).to be_falsy
         end
 
     end
@@ -55,15 +52,9 @@ describe OrderWorker do
     describe 'Worker' do
 
         it 'expects to extract the qty and item code in Hash' do
-            expect(@order_class.extract_code_qty(item_codes[:valid_code])).to include(:qty, :code)
+            expect(@order_class.extract_code_qty(valid_order)).to include(:qty, :code)
         end
 
     end
-
-
-
-
-
-
 
 end

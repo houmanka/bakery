@@ -1,24 +1,33 @@
 require 'bakery'
 require 'language'
+require 'support/let_singleton'
+
 
 describe Bakery do
 
-    let (:sample_orders) {
-        {
-            valid_orders: ['13 CF', '5 VS5'],
-            invalid_orders: [ '12 M*11', nil, ' ABM', '12 VSff' ]
-        }
+    let (:singleton) {
+        LetSingleton.instance
     }
 
+    context 'Application' do
 
+        def fake_stdin(*args)
+            begin
+                $stdin = StringIO.new
+                $stdin.puts(args.shift) until args.empty?
+                $stdin.rewind
+                yield
+            ensure
+                $stdin = STDIN
+            end
+        end
 
-    context 'Bakery' do
-
-       it 'expects to return error' do
-
-           # feed the sample order valid
-
-       end
+        it "should receive `foobar`" do
+            fake_stdin("foobar") do
+                input = gets().chomp()
+                puts input
+            end
+        end
 
      end
 

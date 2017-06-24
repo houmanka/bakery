@@ -1,9 +1,7 @@
 require 'order'
-require 'blueberry_muffin'
-require 'vegemite_scroll'
-require 'croissant'
 require 'validation'
 require 'inventory'
+require 'support/let_singleton'
 
 describe Order do
 
@@ -11,19 +9,12 @@ describe Order do
         Order.new
     }
 
-    let (:sample_orders) {
-         {
-             valid_orders: ['13 CF', '5 VS5'],
-             invalid_orders: [ '12 M*11', nil, ' ABM', '12 VSff' ]
-         }
-    }
-
-    let (:sample_pack) {
-        [{:pack => 3, :price => 5.95}, {:pack => 5, :price => 9.95}, {:pack => 9, :price => 16.99}, {:code => 'CF'}]
+    let (:singleton) {
+        LetSingleton.instance
     }
 
     before(:example) {
-        sample_orders[:valid_orders].each do |item|
+        singleton.sample_orders[:valid_orders].each do |item|
             order.has_been_recorded?(item)
         end
         @customer_order = order.customer_order
@@ -32,7 +23,8 @@ describe Order do
     context 'Save the order' do
 
         it 'needs to record the order in an array' do
-            expect(order.customer_order).to match_array(sample_orders[:valid_orders])
+            valid_orders = singleton.sample_orders[:valid_orders]
+            expect(order.customer_order).to match_array(valid_orders)
         end
 
     end
@@ -42,7 +34,9 @@ describe Order do
     end
 
     it 'expects the inventory via customer order to match the sample output' do
-        expect(Order.fetch_from_inventory(@customer_order[0])).to match_array(sample_pack)
+        expect(Order.fetch_from_inventory(@customer_order[0])).to satisfy {
+            |x| x[0].include?(:pack)
+        }
     end
 
     it 'expects to process customer order' do
