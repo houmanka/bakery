@@ -1,5 +1,8 @@
+# Author: Houman Kargaran
+# Defining Object
 class VegemiteScroll
 
+    # defining the pack for each product entry
     def self.packs
         [
                     { :pack => 3, :price => 6.99 },
@@ -7,6 +10,7 @@ class VegemiteScroll
         ]
     end
 
+    # defining the code for each product entry
     def self.code
         'VS5'
      end

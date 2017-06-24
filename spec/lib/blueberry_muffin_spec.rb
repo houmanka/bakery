@@ -2,19 +2,22 @@ require 'blueberry_muffin'
 
 describe BlueberryMuffin do
     describe 'BlueberryMuffin' do
-        let(:bb_muffin_packs) { BlueberryMuffin.packs }
+        let(:obj) { BlueberryMuffin }
+        let(:expected_code) { 'MB11' }
 
-        it 'expects BlueberryMuffin code to be MB11' do
-            expect(BlueberryMuffin.code).to eq('MB11')
+        it 'expects obj code to match to the expectation' do
+             expect(obj.code).to eq(expected_code)
         end
 
-        it 'expects BlueberryMuffin packs to be Array' do
-            expect(bb_muffin_packs).to be_instance_of(Array)
+        it 'expects obj packs to be Array' do
+            expect(obj.packs).to be_instance_of(Array)
         end
 
-        it 'expects to define BlueberryMuffin packs' do
-            expect(bb_muffin_packs).not_to be_empty
-            expect(bb_muffin_packs[0]).to include(:pack, :price)
+        it 'expects to define obj packs' do
+            puts obj.packs[0].keys
+            expect(obj.packs).to satisfy{
+                |v| v[0].keys.include?(:pack)
+            }
         end
     end
 end

@@ -2,19 +2,22 @@ require 'croissant'
 
 describe Croissant do
     describe 'Croissant' do
-        let(:product_packs) { Croissant.packs }
+        let(:obj) { Croissant }
+        let(:expected_code) { 'CF' }
 
-        it 'expects product code must match' do
-            expect(Croissant.code).to eq('CF')
+        it 'expects obj code to match to the expectation' do
+            expect(obj.code).to eq(expected_code)
         end
 
-        it 'expects product packs to be Array' do
-            expect(product_packs).to be_instance_of(Array)
+        it 'expects obj packs to be Array' do
+            expect(obj.packs).to be_instance_of(Array)
         end
 
-        it 'expects to define product packs' do
-            expect(product_packs).not_to be_empty
-            expect(product_packs[0]).to include(:pack, :price)
+        it 'expects to define obj packs' do
+            puts obj.packs[0].keys
+            expect(obj.packs).to satisfy{
+                |v| v[0].keys.include?(:pack)
+            }
         end
     end
 end

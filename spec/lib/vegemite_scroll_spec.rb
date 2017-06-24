@@ -1,18 +1,21 @@
 require 'vegemite_scroll'
 
     describe 'VegemiteScroll' do
-        let(:product_packs) { VegemiteScroll.packs }
+        let(:obj) { VegemiteScroll }
+        let(:expected_code) { 'VS5' }
 
         it 'expects product code must match' do
-            expect(VegemiteScroll.code).to eq('VS5')
+            expect(obj.code).to eq(expected_code)
         end
 
         it 'expects product packs to be Array' do
-            expect(product_packs).to be_instance_of(Array)
+            expect(obj.packs).to be_instance_of(Array)
         end
 
-        it 'expects to define product packs' do
-            expect(product_packs).not_to be_empty
-            expect(product_packs[0]).to include(:pack, :price)
+        it 'expects to define obj packs' do
+            puts obj.packs[0].keys
+            expect(obj.packs).to satisfy{
+                |v| v[0].keys.include?(:pack)
+            }
         end
     end

@@ -1,5 +1,8 @@
+# Author: Houman Kargaran
+# Defining Object
 class Croissant
 
+    # defining the pack for each product entry
     def self.packs
         [
             { :pack => 3, :price => 5.95 },
@@ -8,6 +11,7 @@ class Croissant
         ]
     end
 
+    # defining the code for each product entry
     def self.code
         'CF'
     end
