@@ -1,24 +1,32 @@
+# @author: Houman Kargaran - 2017
+# This is the core of the application. It has some workers to process the data.
 
 require 'validation'
 require 'inventory'
 
 class Order
 
-    def initialize
 
+    def initialize
         @customer_order = []
         @an_order_item = []
     end
 
+    # Fetch an item upon giving it the code. It hydrates the customer order
+    #
+    # @param [Boolean]
+    # @return [String] Full user input
 
     def has_been_recorded?(order)
-
         unless Validation.validate(order.to_s) && is_a_valid_item_code?(order.to_s)
             return false
         end
         @customer_order.push order.to_s
         return  true
     end
+
+
+
 
     def fulfill_order
         return format_order(process_customer_order)

@@ -4,10 +4,10 @@ require 'vegemite_scroll'
 require 'croissant'
 
 describe Inventory do
-    describe 'Inventory', :focus=>true do
+    describe 'Inventory' do
 
         let(:inventory) {
-            Inventory.new
+            Inventory
         }
 
         let(:code){
@@ -27,20 +27,13 @@ describe Inventory do
             ]
         }
 
-
-        it 'expects Inventory class to exist' do
-            expect(inventory).to be_instance_of(Inventory)
-        end
-
-        it 'expects to find all of the decendants' do
-            items = Inventory.define_inventory
-            expect( items ).to contain_exactly(BlueberryMuffin, VegemiteScroll, Croissant )
+        it 'expects to return all of the classes' do
+            expect( Inventory.define_inventory ).to contain_exactly(BlueberryMuffin, VegemiteScroll, Croissant )
         end
 
 
-        it 'expects to return code and pack in an array' do
-            expect(inventory.fetch_an_item(code)).to be_instance_of(Array)
-            expect(inventory.fetch_an_item(code)).to include(blueberry_muffin[0])
+        it 'expects to return code and pack in correct structure' do
+            expect(inventory.fetch_an_item(code)).to match_array(blueberry_muffin)
         end
 
         it 'expects to return empty array if code is not available' do

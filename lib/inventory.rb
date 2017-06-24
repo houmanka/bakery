@@ -1,21 +1,22 @@
+# @author: Houman Kargaran - 2017
+# This is the bottle neck for accessing to the products. Everything must go through this
+# Note: This is could implemented better. This could be a potential candidate for ( Composite )
+# Note: The Composite design pattern will expose the structure to the main application and increases decoupling
+
 require 'croissant'
 require 'vegemite_scroll'
 require 'blueberry_muffin'
 
 class Inventory
 
-    # FIXME: this is anti pattern to lazy loading.
-    def initialize
-        @klass_array = []
-    end
-
-    def self.define_inventory
-        [ Croissant, BlueberryMuffin, VegemiteScroll]
-    end
+    # Fetch an item upon giving it the code
+    #
+    # @note this can be done better so it will more lazy loading.
+    # @param [String] item code
+    # @return [Array<Hash>] for one product
 
 
-
-    def fetch_an_item(code)
+    def self.fetch_an_item(code)
 
         # find the item code
         klasses = Inventory.define_inventory
@@ -31,10 +32,18 @@ class Inventory
 
         return packs.flatten
 
-
     end
 
 
+    private
 
+    # Defining an array of classes to respond to fetch an item
+    #
+    # @param
+    # @return [Array<Klass>]
+
+    def self.define_inventory
+        [ Croissant, BlueberryMuffin, VegemiteScroll]
+    end
 
 end
