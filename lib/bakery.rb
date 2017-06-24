@@ -42,7 +42,7 @@ class Bakery
             rescue Exception => e
                 self.print_out(ORDER_FORMAT_ERROR)
                 self.print_out(ORDER_EXAMPLE)
-                # retry
+                retry
             else
                 if input == DONE
                     self.print_out('----')
