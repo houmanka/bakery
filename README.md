@@ -26,6 +26,12 @@
  * `sudo gem install yard`
  * `yard server`
  * Go to [http://0.0.0.0:8808/](http://0.0.0.0:8808/)  
+
+    _____________________________________________________
+
+#### How to read the documentation online ( YARD ) 
+ * go to [http://www.rubydoc.info/github/houmanka/bakery/master](http://www.rubydoc.info/github/houmanka/bakery/master)
+ * Note: This is a slow server formatting is not up to Yard standard.
  
  
  Hooroo! :)
