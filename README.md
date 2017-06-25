@@ -30,7 +30,7 @@
     _____________________________________________________
 
 #### How to read the documentation online ( YARD ) 
- * go to [http://www.rubydoc.info/github/houmanka/bakery/master](http://www.rubydoc.info/github/houmanka/bakery/master)
+ * Go to [http://www.rubydoc.info/github/houmanka/bakery/master](http://www.rubydoc.info/github/houmanka/bakery/master)
  * Note: This is a slow server formatting is not up to Yard standard.
  
  
