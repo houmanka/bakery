@@ -17,6 +17,7 @@
  * Run `rake` 
  * Must type **done** to see the calculation
  * Type One Item per line and press Enter after each line 
+ * When you finished. Type 'done' and press enter. 
     
    _____________________________________________________
 
